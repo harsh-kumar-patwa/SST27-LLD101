@@ -1,0 +1,75 @@
+package com.example.profiles;
+
+// /**
+//  * Mutable and confusing. Multiple constructors + setters.
+//  */
+final public class UserProfile {
+    private final String id;
+    private final String email;
+    private String phone;
+    private String displayName;
+    private String address;
+    private boolean marketingOptIn;
+    private String twitter;
+    private String github;
+
+    public UserProfile(Builder profileBuilder) {
+        this.id=profileBuilder.id;
+        this.email=profileBuilder.id;
+        this.phone=profileBuilder.phone;
+        this.displayName=profileBuilder.displayName;
+        this.address=profileBuilder.address;
+        this.marketingOptIn=profileBuilder.marketingOptIn;
+        this.twitter=profileBuilder.twitter;
+        this.github=profileBuilder.github;
+    }
+
+    static class Builder{
+        private String id;
+        private String email;
+        private String phone;
+        private String displayName;
+        private String address;
+        private boolean marketingOptIn;
+        private String twitter;
+        private String github;
+
+        // Builder(){
+
+        // }
+
+        public Builder setId(String id) { this.id = id; return this;}
+        public Builder setEmail(String email) { this.email = email; return this; }
+        public Builder setPhone(String phone) { this.phone = phone; return this;}
+        public Builder setDisplayName(String displayName) { this.displayName = displayName; return this;}
+        public Builder setAddress(String address) { this.address = address; return this;}
+        public Builder setMarketingOptIn(boolean marketingOptIn) { this.marketingOptIn = marketingOptIn; return this;}
+        public Builder setTwitter(String twitter) { this.twitter = twitter; return this;}
+        public Builder setGithub(String github) { this.github = github; return this;}
+
+        public UserProfile build(){
+            Validation.requireNonBlank(this.id , "ID");
+            Validation.requireNonBlank(this.email, "EMAIL");
+            Validation.requireEmail(this.email);
+
+            UserProfile up = new UserProfile(this);
+            return up;
+        }
+
+
+    }
+
+    // getters
+    public String getId() { return id; }
+    public String getEmail() { return email; }
+    public String getPhone() { return phone; }
+    public String getDisplayName() { return displayName; }
+    public String getAddress() { return address; }
+    public boolean isMarketingOptIn() { return marketingOptIn; }
+    public String getTwitter() { return twitter; }
+    public String getGithub() { return github; }
+    public Builder Builder() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'Builder'");
+    }
+}
