@@ -47,9 +47,11 @@ public final class Order {
     }
 
     public int totalBeforeDiscount() {
-        return lines.stream()
-                .mapToInt(line -> line.getQuantity() * line.getUnitPriceCents())
-                .sum();
+        int sum = 0;
+        for (OrderLine l : lines) {
+            sum += l.getQuantity() * l.getUnitPriceCents();
+        }
+        return sum;
     }
 
     public int totalAfterDiscount() {
